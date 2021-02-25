@@ -60,3 +60,37 @@ kubectl run redis-client --rm --tty -i --restart='Never' --env REDIS_PASSWORD=$r
 ```
 
 That's the basics done - we have Dapr running on k8s with Redis for state storage and pub/sub messaging.
+
+## Testing the dashboard
+
+Install contour and envoy and add a proxy :
+
+```
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: dapr-dashboard-proxy
+  namespace: dapr-system
+spec:
+  virtualhost:
+    fqdn: localhost
+  routes:
+  - services:
+    - name: dapr-dashboard
+      port: 8080
+  - conditions:
+    - prefix: /
+    enableWebsockets: true
+    services:
+    - name: dapr-dashboard
+      port: 8080
+```
+
+Then redirect port 80 locally for testing purposes:
+
+```
+kubectl port-forward -n projectcontour svc/envoy 80:80   
+```
+
+Navigate to localhost in browser and see the dashboard.
