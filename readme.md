@@ -66,25 +66,7 @@ That's the basics done - we have Dapr running on k8s with Redis for state storag
 Install contour and envoy and add a proxy :
 
 ```
----
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
-metadata:
-  name: dapr-dashboard-proxy
-  namespace: dapr-system
-spec:
-  virtualhost:
-    fqdn: localhost
-  routes:
-  - services:
-    - name: dapr-dashboard
-      port: 8080
-  - conditions:
-    - prefix: /
-    enableWebsockets: true
-    services:
-    - name: dapr-dashboard
-      port: 8080
+kubectl apply -f http-proxy.yml
 ```
 
 Then redirect port 80 locally for testing purposes:

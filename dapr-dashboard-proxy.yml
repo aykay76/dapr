@@ -1,0 +1,19 @@
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: dapr-dashboard-proxy
+  namespace: dapr-system
+spec:
+  virtualhost:
+    fqdn: <insert fqdn>
+  routes:
+  - services:
+    - name: dapr-dashboard
+      port: 8080
+  - conditions:
+    - prefix: /
+    enableWebsockets: true
+    services:
+    - name: dapr-dashboard
+      port: 8080
