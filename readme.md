@@ -68,11 +68,12 @@ Install contour and envoy and add a proxy :
 ```
 kubectl apply -f http-proxy.yml
 ```
+Browse to FQDN that matches your external IP for Envoy.
 
-Then redirect port 80 locally for testing purposes:
+Or redirect port 80 locally for testing purposes:
 
 ```
-kubectl port-forward -n projectcontour svc/envoy 80:80   
+kubectl port-forward -n dapr-system svc/dapr-dashboard 80:8080
 ```
 
 Navigate to localhost in browser and see the dashboard.
