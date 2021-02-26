@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-aspnet
+  labels:
+    app: test-aspnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-aspnet
+  template:
+    metadata:
+      labels:
+        app: test-aspnet
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "test-aspnet"
+        dapr.io/app-port: "80"
+    spec:
+      containers:
+      - name: test-aspnet
+        image: xxx.azurecr.io/test-aspnet:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always

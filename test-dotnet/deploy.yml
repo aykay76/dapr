@@ -16,12 +16,8 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "test-dotnet"
-        dapr.io/app-port: "80"
-        dapr.io/config: "appconfig"
     spec:
       containers:
       - name: test-dotnet
-        image: repository/test-dotnet:latest
-        ports:
-        - containerPort: 80
+        image: xxx.azurecr.io/test-dotnet:latest
         imagePullPolicy: Always
