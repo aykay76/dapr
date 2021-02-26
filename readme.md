@@ -59,14 +59,14 @@ kubectl run redis-client --rm --tty -i --restart='Never' --env REDIS_PASSWORD=$r
 
 ```
 
-That's the basics done - we have Dapr running on k8s with Redis for state storage and pub/sub messaging.
+That's the basics done - we have Dapr running on k8s with Redis for state storage and pub/sub messaging!
 
 ## Testing the dashboard
 
 Install contour and envoy and add a proxy :
 
 ```
-kubectl apply -f http-proxy.yml
+kubectl apply -f dapr-dashboard-proxy.yml
 ```
 Browse to FQDN that matches your external IP for Envoy.
 
