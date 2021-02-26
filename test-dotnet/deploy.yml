@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-dotnet
+  labels:
+    app: test-dotnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-dotnet
+  template:
+    metadata:
+      labels:
+        app: test-dotnet
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "test-dotnet"
+        dapr.io/app-port: "80"
+        dapr.io/config: "appconfig"
+    spec:
+      containers:
+      - name: test-dotnet
+        image: repository/test-dotnet:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
